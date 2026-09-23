@@ -6,7 +6,7 @@ import { Bell, Building2, ChevronDown, ClipboardList, FileText, LayoutDashboard,
 
 type DashboardData = { sales:number; completedOrders:number; activeCenters:number; pendingPayouts:number; trend:{month:string;sales:number}[]; centers:{code:string;name:string;location:string|null;sales:number;orders:number;status:string}[]; orders:{id:string;student:string;center:string;amount:number;status:string}[]; configured:boolean }
 const emptyData: DashboardData = { sales:0, completedOrders:0, activeCenters:0, pendingPayouts:0, trend:[], centers:[], orders:[], configured:false }
-const links = [[LayoutDashboard,'Dashboard','/dashboard'],[Building2,'Franchises','#'],[Users,'Students','#'],[ClipboardList,'Orders','#'],[WalletCards,'Payouts','#'],[FileText,'Reports','#'],[Settings,'Settings','#']] as const
+const links = [[LayoutDashboard,'Dashboard','/dashboard'],[Building2,'Franchises','/systems/franchises'],[Users,'Students','/systems/students'],[ClipboardList,'Orders','/systems/orders'],[WalletCards,'Payouts','/systems/payouts'],[FileText,'Reports','/systems/reports'],[Settings,'Settings','/systems/settings']] as const
 const money = (value:number) => `৳ ${value.toLocaleString('en-BD')}`
 
 function Stat({ icon:Icon, label, value }: { icon: typeof Users; label:string; value:string }) { return <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"><div className="flex size-10 items-center justify-center rounded-xl bg-blue-50 text-[#173b67]"><Icon /></div><p className="mt-5 text-sm text-slate-500">{label}</p><p className="mt-1 text-2xl font-bold tracking-tight text-slate-900">{value}</p></div> }

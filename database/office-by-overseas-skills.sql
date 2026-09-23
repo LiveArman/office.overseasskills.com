@@ -36,4 +36,20 @@ INSERT IGNORE INTO orders (wordpress_order_id, franchise_id, student_wp_id, stud
 SELECT 1001, f.id, 501, 'Nusrat Jahan', '+8801811000000', 'completed', 12500.00, 12500.00, 'direct', CURRENT_TIMESTAMP
 FROM franchises f WHERE f.code = 'FC-DHK-01';
 
+INSERT IGNORE INTO locations (division, district, upazila, code) VALUES
+('Chattogram', 'Chattogram', 'Panchlaish', 'CTG-PANCHLAISH'),
+('Sylhet', 'Sylhet', 'Zindabazar', 'SYL-ZINDABAZAR');
+INSERT IGNORE INTO franchises (code, name, phone, email, address, location_id, status)
+SELECT 'FC-CTG-01', 'Chattogram Skills Point', '+8801712000000', 'chattogram@overseasskills.com', 'Panchlaish, Chattogram', id, 'active'
+FROM locations WHERE code = 'CTG-PANCHLAISH';
+INSERT IGNORE INTO franchises (code, name, phone, email, address, location_id, status)
+SELECT 'FC-SYL-01', 'Sylhet Learning Center', '+8801713000000', 'sylhet@overseasskills.com', 'Zindabazar, Sylhet', id, 'active'
+FROM locations WHERE code = 'SYL-ZINDABAZAR';
+INSERT IGNORE INTO orders (wordpress_order_id, franchise_id, student_wp_id, student_name, student_phone, status, subtotal, total, attribution, placed_at)
+SELECT 1002, f.id, 502, 'Rafi Ahmed', '+8801820000000', 'processing', 9800.00, 9800.00, 'territory', CURRENT_TIMESTAMP - INTERVAL 2 DAY
+FROM franchises f WHERE f.code = 'FC-CTG-01';
+INSERT IGNORE INTO orders (wordpress_order_id, franchise_id, student_wp_id, student_name, student_phone, status, subtotal, total, attribution, placed_at)
+SELECT 1003, f.id, 503, 'Mim Akter', '+8801830000000', 'completed', 15600.00, 15600.00, 'direct', CURRENT_TIMESTAMP - INTERVAL 5 DAY
+FROM franchises f WHERE f.code = 'FC-SYL-01';
+
 SET FOREIGN_KEY_CHECKS=1;
