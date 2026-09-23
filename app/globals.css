@@ -1,0 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+@import 'tailwindcss';
+:root { --background:#f6f8fb; --foreground:#122033; --muted:#64748b; --line:#e2e8f0; --primary:#173b67; --teal:#0f9f9a; --card:#ffffff; }
+*{box-sizing:border-box} body{margin:0;background:var(--background);color:var(--foreground);font-family:Inter,'Noto Sans Bengali',sans-serif} button{font:inherit} 
