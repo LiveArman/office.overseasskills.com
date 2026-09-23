@@ -1,0 +1,5 @@
+import mysql, { type Pool, type PoolConnection, type RowDataPacket } from 'mysql2/promise'
+let pool: Pool | undefined
+export function getDb() { if (!pool) { if (!process.env.MYSQL_HOST) throw new Error('Database is not configured. Copy .env.example to .env and add MySQL credentials.') ; pool=mysql.createPool({host:process.env.MYSQL_HOST,port:Number(process.env.MYSQL_PORT||3306),database:process.env.MYSQL_DATABASE,user:process.env.MYSQL_USER,password:process.env.MYSQL_PASSWORD,waitForConnections:true,connectionLimit:10}) } return pool }
+export async function query<T extends RowDataPacket[]>(sql:string, params:unknown[]=[]):Promise<T>{const [rows]=await getDb().query<T>(sql,params);return rows}
+export async function transaction<T>(fn:(connection:PoolConnection)=>Promise<T>){const connection=await getDb().getConnection();try{await connection.beginTransaction();const result=await fn(connection);await connection.commit();return result}catch(error){await connection.rollback();throw error}finally{connection.release()}}
